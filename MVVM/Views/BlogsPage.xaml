@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Blogs.MVVM.Views"
+             xmlns:viewModels="clr-namespace:Blogs.MVVM.ViewModels"
+             xmlns:models="clr-namespace:Blogs.MVVM.Models"
+             x:DataType="viewModels:BlogsPageViewModel"
+             x:Class="Blogs.MVVM.Views.BlogsPage"
+             Title="Blogs">
+    <CollectionView x:Name="collectionView"
+                    ItemsSource="{Binding Blogs}"
+                    SelectionMode="Single" 
+                    SelectionChangedCommand="{Binding SelectBlogCommand}"
+                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference collectionView}}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Blog">
+                <ContentView Padding="10">
+                    <Grid RowDefinitions="200,20" Padding="10">
+                        <Image Source="{Binding ImageUrl}"/>
+                        <Label Text="{Binding Title}" Grid.Row="1"/>
+                    </Grid>
+                </ContentView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</views:BaseContentPage>
